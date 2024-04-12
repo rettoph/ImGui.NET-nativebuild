@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 3.1)
 
 project(cimgui)
 
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 #general settings
+include(InstallRequiredSystemLibraries)
+
 file(GLOB IMGUI_SOURCES
     cimgui/imgui/imgui.cpp
     cimgui/imgui/imgui_draw.cpp
@@ -15,8 +19,8 @@ file(GLOB IMGUI_SOURCES
 )
 
 add_library(cimgui SHARED 
-    cimgui/cimgui.cpp
     ${IMGUI_SOURCES}
+    cimgui/cimgui.cpp
 )
 
 target_compile_definitions(cimgui PUBLIC IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
